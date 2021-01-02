@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(example)
+project(path-tracer)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 include(conan)
@@ -9,7 +9,9 @@ conan_cmake_run(CONANFILE conanfile.txt
                 BASIC_SETUP CMAKE_TARGETS
                 BUILD missing)
 
-set(SOURCES main.cpp)
+set(SOURCES
+    src/image.cpp
+    src/main.cpp)
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 add_sycl_to_target(TARGET ${PROJECT_NAME} SOURCES ${SOURCES})
