@@ -7,14 +7,16 @@
 
 class Image {
 public:
-  using Buffer = cl::sycl::buffer<Color, 1>;
+  using ImageBufType = cl::sycl::buffer<Color, 1>;
 
   Image(unsigned width, unsigned height)
       : width_(width), height_(height), image_data_(width * height) {}
 
-  Extent get_extent() const { return {width_, height_}; }
+  unsigned get_width() const { return width_; }
 
-  Buffer get_buffer() { return Buffer(image_data_); }
+  unsigned get_height() const { return height_; }
+
+  ImageBufType get_buffer() { return ImageBufType(image_data_); }
 
   void save(std::string path) const;
 

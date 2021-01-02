@@ -1,11 +1,11 @@
 #include "image.hpp"
 #include <filesystem>
-#include <iostream>
+#include <stdexcept>
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include <stb_image_write.h>
 
 void Image::save(std::string path) const {
-  std::cout << "Saving to " << path << std::endl;
+  stbi_flip_vertically_on_write(1);
   std::string extension = std::filesystem::path(path).extension();
   if (extension == ".png")
     stbi_write_png(path.c_str(), width_, height_, Color::length(), image_data_.data(),
@@ -17,5 +17,5 @@ void Image::save(std::string path) const {
   else if (extension == ".jpg")
     stbi_write_jpg(path.c_str(), width_, height_, Color::length(), image_data_.data(), 100);
   else
-    std::cout << "Unsupported image type " << extension << std::endl;
+    throw std::runtime_error("Unsupported image type " + extension);
 }

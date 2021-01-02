@@ -11,6 +11,8 @@ conan_cmake_run(CONANFILE conanfile.txt
 
 set(SOURCES
     src/image.cpp
+    src/scene.cpp
+    src/render.cpp
     src/main.cpp)
 
 add_executable(${PROJECT_NAME} ${SOURCES})
